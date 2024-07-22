@@ -8,7 +8,7 @@ import { Modal } from "../components/Modal";
 import "../styles/BookList.scss";
 import { useGetBooks } from "../hooks/bookDetails";
 import { booksPerPage } from "../constants/books";
-import { SkeletonLoader } from "./skeletalLoaders/BookListLoader";
+import { BookListLoader } from "./skeletalLoaders/BookListLoader";
 
 interface BookListState {
   localBooks: Book[];
@@ -132,7 +132,7 @@ export const BookList: React.FC = () => {
       {isLoading ? (
         <div className="book-list">
           {Array.from({ length: booksPerPage }).map((_, index) => (
-            <SkeletonLoader key={index} />
+            <BookListLoader key={index} />
           ))}
         </div>
       ) : (

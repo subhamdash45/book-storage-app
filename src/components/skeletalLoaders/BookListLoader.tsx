@@ -1,6 +1,6 @@
-import "../../styles/BookDetailSkeletonLoader.scss";
+import "../../styles/BookListSkeletonLoader.scss";
 
-export const SkeletonLoader: React.FC = () => {
+export const BookListLoader: React.FC = () => {
   return (
     <div className="skeleton-card">
       <div className="skeleton skeleton-poster"></div>
