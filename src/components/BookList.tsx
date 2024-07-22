@@ -3,7 +3,7 @@ import { BookItem } from "../components/BookItem";
 import { Pagination } from "../components/Pagination";
 import { useSnackbar } from "notistack";
 import { BookForm } from "../components/BookForm";
-import { Book } from "../types";
+import { Book } from "../interfaces";
 import { Modal } from "../components/Modal";
 import "../styles/BookList.scss";
 import { useGetBooks } from "../hooks/bookDetails";
@@ -57,7 +57,7 @@ export const BookList: React.FC = () => {
       setState((prevState) => ({
         ...prevState,
         localBooks: prevState.localBooks.map((book) =>
-          book.id === updatedBook.id ? updatedBook : book
+          book.id === updatedBook.id ? updatedBook : book,
         ),
         editingBook: null,
       }));
@@ -65,7 +65,7 @@ export const BookList: React.FC = () => {
       setState((prevState) => ({
         ...prevState,
         apiBooks: prevState.apiBooks.map((book) =>
-          book.id === updatedBook.id ? updatedBook : book
+          book.id === updatedBook.id ? updatedBook : book,
         ),
         editingBook: null,
       }));
@@ -111,7 +111,7 @@ export const BookList: React.FC = () => {
 
   const paginatedBooks = allBooks.slice(
     (state.currentPage - 1) * booksPerPage,
-    state.currentPage * booksPerPage
+    state.currentPage * booksPerPage,
   );
 
   const handlePageChange = (page: number) => {

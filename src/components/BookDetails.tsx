@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/BookDetail.scss";
 import { useNavigate } from "react-router-dom";
-import { Book } from "../types";
+import { Book } from "../interfaces";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 

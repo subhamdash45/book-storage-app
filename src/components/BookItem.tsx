@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Book } from "../types";
+import { Book } from "../interfaces";
 import { useNavigate } from "react-router-dom";
 import { toggleFavorite, isFavorite } from "../utils/localStorage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -42,7 +42,7 @@ export const BookItem: React.FC<BookItemProps> = ({
       `Book - ${book.title} has been ${
         isNowFavorite ? "added to" : "removed from"
       } favorites`,
-      { variant: "success" }
+      { variant: "success" },
     );
   };
 

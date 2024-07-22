@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Book } from "../types";
+import { Book } from "../interfaces";
 import "../styles/BookForm.scss";
 
 interface BookFormProps {
