@@ -1,0 +1,52 @@
+.skeleton-book-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.skeleton {
+  background-color: #ddd;
+  border-radius: 4px;
+  background: linear-gradient(to right, #ddd 0%, #eee 20%, #ddd 40%, #ddd 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton-cover {
+  width: 100%;
+  height: 65vh;
+  margin-bottom: 16px;
+}
+
+.skeleton-title {
+  width: 50%;
+  height: 24px;
+  margin-bottom: 16px;
+}
+
+.skeleton-author {
+  width: 30%;
+  height: 20px;
+  margin-bottom: 16px;
+}
+
+.skeleton-description {
+  width: 60%;
+  height: 16px;
+  margin-bottom: 16px;
+}
+
+.skeleton-date {
+  width: 20%;
+  height: 16px;
+}

@@ -1,0 +1,22 @@
+.book-form {
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.book-form div {
+  margin-bottom: 10px;
+}
+
+.book-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.book-form input,
+.book-form textarea {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
