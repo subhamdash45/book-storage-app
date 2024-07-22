@@ -53,7 +53,7 @@ export const BookItem: React.FC<BookItemProps> = ({
   return (
     <div
       className="card-container"
-      onClick={() => navigate(`/book/${book.id}`)}
+      onClick={() => navigate(`/book/${book.id}`, { state: { book } })}
     >
       <div className="card">
         {showPoster ? (
@@ -74,10 +74,20 @@ export const BookItem: React.FC<BookItemProps> = ({
             <button onClick={handleFavoriteToggle}>
               <FontAwesomeIcon icon={favorite ? solidHeart : regularHeart} />
             </button>
-            <button onClick={(e) => onEdit(e)}>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onEdit(e);
+              }}
+            >
               <FontAwesomeIcon icon={faEdit} />
             </button>
-            <button onClick={(e) => onDelete(book.id, e)}>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete(book.id, e);
+              }}
+            >
               <FontAwesomeIcon icon={faTrashAlt} />
             </button>
           </div>

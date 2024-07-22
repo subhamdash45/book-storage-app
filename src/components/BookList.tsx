@@ -10,13 +10,23 @@ import { useGetBooks } from "../hooks/bookDetails";
 import { booksPerPage } from "../constants/books";
 import { SkeletonLoader } from "./skeletalLoaders/SkeletonLoader";
 
-const BookList: React.FC = () => {
-  const { data, isLoading, error } = useGetBooks();
-  const [localBooks, setLocalBooks] = useState<Book[]>([]);
-  const [allBooks, setAllBooks] = useState<Book[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [editingBook, setEditingBook] = useState<Book | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+interface BookListState {
+  localBooks: Book[];
+  apiBooks: Book[];
+  currentPage: number;
+  editingBook: Book | null;
+  isModalOpen: boolean;
+}
+
+export const BookList: React.FC = () => {
+  const { data: apiBooks, isLoading, error } = useGetBooks();
+  const [state, setState] = useState<BookListState>({
+    localBooks: [],
+    apiBooks: [],
+    currentPage: 1,
+    editingBook: null,
+    isModalOpen: false,
+  });
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
@@ -24,66 +34,92 @@ const BookList: React.FC = () => {
       enqueueSnackbar("Failed to load books. Please try again later.", {
         variant: "error",
       });
-    } else if (data) {
-      setAllBooks([...data, ...localBooks]);
+    } else if (apiBooks) {
+      setState((prevState) => ({
+        ...prevState,
+        apiBooks: apiBooks,
+      }));
     }
-  }, [data, error, enqueueSnackbar, localBooks]);
+  }, [apiBooks, error, enqueueSnackbar]);
 
-  useEffect(() => {
-    setAllBooks([...(data || []), ...localBooks]);
-  }, [localBooks, data]);
+  const allBooks = [...state.localBooks, ...state.apiBooks];
 
   const handleAddBook = (newBook: Book) => {
-    setLocalBooks([...localBooks, newBook]);
+    setState((prevState) => ({
+      ...prevState,
+      localBooks: [newBook, ...prevState.localBooks],
+      currentPage: 1,
+    }));
   };
 
   const handleEditBook = (updatedBook: Book) => {
     if (updatedBook.id < 0) {
-      // Update local book
-      setLocalBooks(
-        localBooks.map((book) =>
+      setState((prevState) => ({
+        ...prevState,
+        localBooks: prevState.localBooks.map((book) =>
           book.id === updatedBook.id ? updatedBook : book
-        )
-      );
+        ),
+        editingBook: null,
+      }));
     } else {
-      // Update API book
-      setAllBooks(
-        allBooks.map((book) =>
+      setState((prevState) => ({
+        ...prevState,
+        apiBooks: prevState.apiBooks.map((book) =>
           book.id === updatedBook.id ? updatedBook : book
-        )
-      );
+        ),
+        editingBook: null,
+      }));
     }
-    setEditingBook(null);
   };
 
   const handleDeleteBook = (id: number) => {
     if (id < 0) {
-      // Delete local book
-      setLocalBooks(localBooks.filter((book) => book.id !== id));
+      setState((prevState) => ({
+        ...prevState,
+        localBooks: prevState.localBooks.filter((book) => book.id !== id),
+      }));
     } else {
-      // Delete API book
-      setAllBooks(allBooks.filter((book) => book.id !== id));
+      setState((prevState) => ({
+        ...prevState,
+        apiBooks: prevState.apiBooks.filter((book) => book.id !== id),
+      }));
     }
   };
 
   const handleOpenModal = () => {
-    setEditingBook(null);
-    setIsModalOpen(true);
+    setState((prevState) => ({
+      ...prevState,
+      editingBook: null,
+      isModalOpen: true,
+    }));
   };
 
   const handleEdit = (book: Book) => {
-    setEditingBook(book);
-    setIsModalOpen(true);
+    setState((prevState) => ({
+      ...prevState,
+      editingBook: book,
+      isModalOpen: true,
+    }));
   };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false);
+    setState((prevState) => ({
+      ...prevState,
+      isModalOpen: false,
+    }));
   };
 
   const paginatedBooks = allBooks.slice(
-    (currentPage - 1) * booksPerPage,
-    currentPage * booksPerPage
+    (state.currentPage - 1) * booksPerPage,
+    state.currentPage * booksPerPage
   );
+
+  const handlePageChange = (page: number) => {
+    setState((prevState) => ({
+      ...prevState,
+      currentPage: page,
+    }));
+  };
 
   if (error) return <div>Error loading books list page</div>;
 
@@ -101,11 +137,11 @@ const BookList: React.FC = () => {
         </div>
       ) : (
         <>
-          <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+          <Modal isOpen={state.isModalOpen} onClose={handleCloseModal}>
             <BookForm
               onAddBook={handleAddBook}
               onEditBook={handleEditBook}
-              editingBook={editingBook}
+              editingBook={state.editingBook}
               onClose={handleCloseModal}
             />
           </Modal>
@@ -128,13 +164,11 @@ const BookList: React.FC = () => {
           <Pagination
             totalItems={allBooks.length}
             itemsPerPage={booksPerPage}
-            currentPage={currentPage}
-            onPageChange={setCurrentPage}
+            currentPage={state.currentPage}
+            onPageChange={handlePageChange}
           />
         </>
       )}
     </div>
   );
 };
-
-export default BookList;

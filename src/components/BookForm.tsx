@@ -44,7 +44,7 @@ export const BookForm: React.FC<BookFormProps> = ({
     if (editingBook) {
       onEditBook(data);
     } else {
-      data.id = new Date().valueOf() * -1; // Generate a unique negative ID for new books to distinguish them from API books
+      data.id = new Date().valueOf() * -1;
       onAddBook(data);
     }
     reset();
