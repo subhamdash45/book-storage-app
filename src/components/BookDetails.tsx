@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import "../styles/BookDetail.scss";
 import { useNavigate } from "react-router-dom";
 import { Book } from "../interfaces";
@@ -11,6 +11,10 @@ interface BookDetailProps {
 
 export const BookDetail: React.FC<BookDetailProps> = ({ book }) => {
   const navigate = useNavigate();
+  const [showPoster, setShowPoster] = useState(true);
+  const hidePoster = () => {
+    setShowPoster(false);
+  };
 
   const { cover, title, author, description, publicationDate } = book;
 
@@ -23,12 +27,13 @@ export const BookDetail: React.FC<BookDetailProps> = ({ book }) => {
         </button>
       </div>
       <div className="book-detail">
-        {cover ? (
+        {cover && showPoster ? (
           <img
             src={cover}
             className="posterImage poster"
             alt="book-logo"
             loading={"lazy"}
+            onError={hidePoster}
           />
         ) : (
           <FontAwesomeIcon icon={faImage} className="posterImage poster" />

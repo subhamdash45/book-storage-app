@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { BookItem } from "../components/BookItem";
 import { Pagination } from "../components/Pagination";
 import { useSnackbar } from "notistack";
@@ -8,7 +8,7 @@ import { Modal } from "../components/Modal";
 import "../styles/BookList.scss";
 import { useGetBooks } from "../hooks/bookDetails";
 import { booksPerPage } from "../constants/books";
-import { SkeletonLoader } from "./skeletalLoaders/SkeletonLoader";
+import { SkeletonLoader } from "./skeletalLoaders/BookListLoader";
 
 interface BookListState {
   localBooks: Book[];

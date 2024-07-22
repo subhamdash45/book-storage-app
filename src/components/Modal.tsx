@@ -1,4 +1,3 @@
-import React from "react";
 import { createPortal } from "react-dom";
 import "../styles/Modal.scss";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";

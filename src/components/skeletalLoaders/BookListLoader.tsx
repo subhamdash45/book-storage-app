@@ -1,5 +1,4 @@
-import React from "react";
-import "../../styles/SkeletonLoader.scss";
+import "../../styles/BookDetailSkeletonLoader.scss";
 
 export const SkeletonLoader: React.FC = () => {
   return (

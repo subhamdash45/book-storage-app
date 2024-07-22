@@ -1,6 +1,7 @@
 .skeleton-card {
+  height: 240px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 8px;
   align-items: center;
   border: 1px solid #ccc;
@@ -26,7 +27,7 @@
 
 .skeleton-poster {
   width: 100%;
-  height: 150px;
+  height: 175px;
 }
 
 .skeleton-title {
