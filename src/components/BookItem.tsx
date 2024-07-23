@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TBook } from "../types";
 import { useNavigate } from "react-router-dom";
 import { toggleFavorite, isFavorite } from "../utils/localStorage";
@@ -39,7 +39,7 @@ export const BookItem: React.FC<TBookItemProps> = ({
     const isNowFavorite = isFavorite(book.id);
     setFavorite(isNowFavorite);
     enqueueSnackbar(
-      `TBook - ${book.title} has been ${
+      `Book - ${book.title} has been ${
         isNowFavorite ? "added to" : "removed from"
       } favorites`,
       { variant: "success" },

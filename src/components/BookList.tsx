@@ -1,20 +1,20 @@
-import { useState, useEffect, useMemo } from "react";
-import { BookItem } from "../components/BookItem";
-import { Pagination } from "../components/Pagination";
+import React, { useState, useEffect } from "react";
+import { BookItem } from "./BookItem";
+import { Pagination } from "./Pagination";
 import { useSnackbar } from "notistack";
-import { BookForm } from "../components/BookForm";
-import { Book } from "../types";
-import { Modal } from "../components/Modal";
+import { BookForm } from "./BookForm";
+import { TBook } from "../types";
+import { Modal } from "./Modal";
 import "../styles/BookList.scss";
 import { useGetBooks } from "../hooks/bookDetails";
 import { booksPerPage } from "../constants/books";
 import { BookListLoader } from "./skeletalLoaders/BookListLoader";
 
 type TBookListState = {
-  localBooks: Book[];
-  apiBooks: Book[];
+  localBooks: TBook[];
+  apiBooks: TBook[];
   currentPage: number;
-  editingBook: Book | null;
+  editingBook: TBook | null;
   isModalOpen: boolean;
 };
 
@@ -44,7 +44,7 @@ export const BookList: React.FC = () => {
 
   const allBooks = [...state.localBooks, ...state.apiBooks];
 
-  const handleAddBook = (newBook: Book) => {
+  const handleAddBook = (newBook: TBook) => {
     setState((prevState) => ({
       ...prevState,
       localBooks: [newBook, ...prevState.localBooks],
@@ -52,7 +52,7 @@ export const BookList: React.FC = () => {
     }));
   };
 
-  const handleEditBook = (updatedBook: Book) => {
+  const handleEditBook = (updatedBook: TBook) => {
     if (updatedBook.id < 0) {
       setState((prevState) => ({
         ...prevState,
@@ -94,7 +94,7 @@ export const BookList: React.FC = () => {
     }));
   };
 
-  const handleEdit = (book: Book) => {
+  const handleEdit = (book: TBook) => {
     setState((prevState) => ({
       ...prevState,
       editingBook: book,
@@ -109,13 +109,9 @@ export const BookList: React.FC = () => {
     }));
   };
 
-  const paginatedBooks = useMemo(
-    () =>
-      allBooks.slice(
-        (state.currentPage - 1) * booksPerPage,
-        state.currentPage * booksPerPage,
-      ),
-    [allBooks, state.currentPage, booksPerPage],
+  const paginatedBooks = allBooks.slice(
+    (state.currentPage - 1) * booksPerPage,
+    state.currentPage * booksPerPage,
   );
 
   const handlePageChange = (page: number) => {

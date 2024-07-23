@@ -39,3 +39,17 @@
   width: 30%;
   height: 24px;
 }
+
+@media (max-width: 768px) {
+  .card-container {
+    grid-template-columns: 1fr;
+  }
+
+  .poster {
+    height: 200px;
+  }
+
+  .title {
+    font-size: 1.2em;
+  }
+}

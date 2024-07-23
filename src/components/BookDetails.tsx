@@ -38,9 +38,9 @@ export const BookDetail: React.FC<TBookDetailProps> = ({ book }) => {
         ) : (
           <FontAwesomeIcon icon={faImage} className="posterImage poster" />
         )}
-        <h2>{title}</h2>
-        <p>{author}</p>
-        <p>{description}</p>
+        <h2 className="text">{title}</h2>
+        <p className="text">{author}</p>
+        <p className="text">{description}</p>
         <p>
           {publicationDate
             ? new Date(publicationDate).toLocaleDateString()

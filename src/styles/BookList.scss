@@ -20,3 +20,25 @@
   align-content: flex-start;
   justify-content: center;
 }
+
+.text {
+  word-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .book-list {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+  }
+
+  .book-list-container {
+    height: 95vh;
+    width: 95vw;
+  }
+}

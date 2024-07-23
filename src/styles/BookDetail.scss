@@ -1,5 +1,5 @@
 .book-detail {
-  height: calc(100vh - 56px);
+  height: calc(100vh - 74px);
   padding: 0px 20px;
   text-align: center;
 }
@@ -16,4 +16,22 @@
 
 .book-detail h2 {
   margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+  .book-detail {
+    flex-direction: row;
+    align-items: flex-start;
+    height: 95vh;
+    width: 95vw;
+  }
+
+  .book-detail img {
+    max-width: 300px;
+    margin-right: 20px;
+  }
+
+  .book-info {
+    max-width: none;
+  }
 }
