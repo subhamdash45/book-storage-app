@@ -2,7 +2,6 @@ import axios from "axios";
 import { TBook } from "../types";
 
 export const getBooks = async (): Promise<TBook[]> => {
-  console.log("Fetching books...");
   const { data } = await axios.get(
     "https://my-json-server.typicode.com/cutamar/mock/books",
   );
