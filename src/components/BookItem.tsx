@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Book } from "../interfaces";
+import { TBook } from "../types";
 import { useNavigate } from "react-router-dom";
 import { toggleFavorite, isFavorite } from "../utils/localStorage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,13 +13,13 @@ import "../styles/BookItem.scss";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { useSnackbar } from "notistack";
 
-interface BookItemProps {
-  book: Book;
+type TBookItemProps = {
+  book: TBook;
   onEdit: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onDelete: (id: number, e: React.MouseEvent<HTMLButtonElement>) => void;
-}
+};
 
-export const BookItem: React.FC<BookItemProps> = ({
+export const BookItem: React.FC<TBookItemProps> = ({
   book,
   onEdit,
   onDelete,
@@ -39,7 +39,7 @@ export const BookItem: React.FC<BookItemProps> = ({
     const isNowFavorite = isFavorite(book.id);
     setFavorite(isNowFavorite);
     enqueueSnackbar(
-      `Book - ${book.title} has been ${
+      `TBook - ${book.title} has been ${
         isNowFavorite ? "added to" : "removed from"
       } favorites`,
       { variant: "success" },

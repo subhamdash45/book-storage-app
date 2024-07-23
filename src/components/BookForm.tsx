@@ -1,26 +1,26 @@
 import { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Book } from "../interfaces";
+import { TBook } from "../types";
 import "../styles/BookForm.scss";
 
-interface BookFormProps {
-  onAddBook: (book: Book) => void;
-  onEditBook: (book: Book) => void;
-  editingBook: Book | null;
+type TBookFormProps = {
+  onAddBook: (book: TBook) => void;
+  onEditBook: (book: TBook) => void;
+  editingBook: TBook | null;
   onClose: () => void;
-}
+};
 
-export const BookForm: React.FC<BookFormProps> = ({
+export const BookForm: React.FC<TBookFormProps> = ({
   onAddBook,
   onEditBook,
   editingBook,
   onClose,
 }) => {
-  const { register, handleSubmit, reset, setValue } = useForm<Book>();
+  const { register, handleSubmit, reset, setValue } = useForm<TBook>();
 
   useEffect(() => {
     if (editingBook) {
-      const fields: (keyof Book)[] = [
+      const fields: (keyof TBook)[] = [
         "id",
         "title",
         "author",
@@ -40,7 +40,7 @@ export const BookForm: React.FC<BookFormProps> = ({
     }
   }, [editingBook, setValue, reset]);
 
-  const onSubmit: SubmitHandler<Book> = (data) => {
+  const onSubmit: SubmitHandler<TBook> = (data) => {
     if (editingBook) {
       onEditBook(data);
     } else {
@@ -77,7 +77,7 @@ export const BookForm: React.FC<BookFormProps> = ({
           {...register("publicationDate", { required: true })}
         />
       </div>
-      <button type="submit">{editingBook ? "Edit Book" : "Add Book"}</button>
+      <button type="submit">{editingBook ? "Edit TBook" : "Add TBook"}</button>
     </form>
   );
 };

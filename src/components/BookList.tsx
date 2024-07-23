@@ -1,26 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { BookItem } from "../components/BookItem";
 import { Pagination } from "../components/Pagination";
 import { useSnackbar } from "notistack";
 import { BookForm } from "../components/BookForm";
-import { Book } from "../interfaces";
+import { Book } from "../types";
 import { Modal } from "../components/Modal";
 import "../styles/BookList.scss";
 import { useGetBooks } from "../hooks/bookDetails";
 import { booksPerPage } from "../constants/books";
 import { BookListLoader } from "./skeletalLoaders/BookListLoader";
 
-interface BookListState {
+type TBookListState = {
   localBooks: Book[];
   apiBooks: Book[];
   currentPage: number;
   editingBook: Book | null;
   isModalOpen: boolean;
-}
+};
 
 export const BookList: React.FC = () => {
   const { data: apiBooks, isLoading, error } = useGetBooks();
-  const [state, setState] = useState<BookListState>({
+  const [state, setState] = useState<TBookListState>({
     localBooks: [],
     apiBooks: [],
     currentPage: 1,
@@ -109,9 +109,13 @@ export const BookList: React.FC = () => {
     }));
   };
 
-  const paginatedBooks = allBooks.slice(
-    (state.currentPage - 1) * booksPerPage,
-    state.currentPage * booksPerPage,
+  const paginatedBooks = useMemo(
+    () =>
+      allBooks.slice(
+        (state.currentPage - 1) * booksPerPage,
+        state.currentPage * booksPerPage,
+      ),
+    [allBooks, state.currentPage, booksPerPage],
   );
 
   const handlePageChange = (page: number) => {

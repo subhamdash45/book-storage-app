@@ -1,13 +1,13 @@
 import "../styles/Pagination.scss";
 
-interface PaginationProps {
+type TPaginationProps = {
   totalItems: number;
   itemsPerPage: number;
   currentPage: number;
   onPageChange: (page: number) => void;
-}
+};
 
-export const Pagination: React.FC<PaginationProps> = ({
+export const Pagination: React.FC<TPaginationProps> = ({
   totalItems,
   itemsPerPage,
   currentPage,

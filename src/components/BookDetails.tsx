@@ -1,15 +1,15 @@
 import { useState } from "react";
 import "../styles/BookDetail.scss";
 import { useNavigate } from "react-router-dom";
-import { Book } from "../interfaces";
+import { TBook } from "../types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 
-interface BookDetailProps {
-  book: Book;
-}
+type TBookDetailProps = {
+  book: TBook;
+};
 
-export const BookDetail: React.FC<BookDetailProps> = ({ book }) => {
+export const BookDetail: React.FC<TBookDetailProps> = ({ book }) => {
   const navigate = useNavigate();
   const [showPoster, setShowPoster] = useState(true);
   const hidePoster = () => {

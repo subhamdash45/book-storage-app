@@ -1,7 +1,7 @@
 import axios from "axios";
-import { Book } from "../interfaces";
+import { TBook } from "../types";
 
-export const getBooks = async (): Promise<Book[]> => {
+export const getBooks = async (): Promise<TBook[]> => {
   console.log("Fetching books...");
   const { data } = await axios.get(
     "https://my-json-server.typicode.com/cutamar/mock/books",
@@ -9,7 +9,7 @@ export const getBooks = async (): Promise<Book[]> => {
   return data;
 };
 
-export const getBookDetails = async (id: string): Promise<Book> => {
+export const getBookDetails = async (id: string): Promise<TBook> => {
   const { data } = await axios.get(
     `https://my-json-server.typicode.com/cutamar/mock/books/${id}`,
   );

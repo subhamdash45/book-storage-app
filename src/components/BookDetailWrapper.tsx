@@ -1,12 +1,12 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { Book } from "../interfaces";
+import { TBook } from "../types";
 import { BookDetail } from "./BookDetails";
 
 export const BookDetailWrapper: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const book: Book | undefined = location.state?.book;
+  const book: TBook | undefined = location.state?.book;
 
   if (!book) {
     navigate("/books");
