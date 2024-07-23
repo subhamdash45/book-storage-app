@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 56px;
+  height: 74px;
   padding: 0 16px;
 }
 
@@ -15,7 +15,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  padding: 0 16px;
-  height: calc(100vh - 130px);
+  padding: 16px;
+  min-height: calc(100vh - 190px);
   align-content: flex-start;
+  justify-content: center;
 }

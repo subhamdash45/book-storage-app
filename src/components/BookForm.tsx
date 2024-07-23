@@ -30,7 +30,7 @@ export const BookForm: React.FC<BookFormProps> = ({
       ];
       fields.forEach((field) => {
         if (field === "publicationDate") {
-          setValue(field, editingBook[field].split("T")[0] as any);
+          setValue(field, editingBook[field].split("T")[0]);
         } else {
           setValue(field, editingBook[field]);
         }
