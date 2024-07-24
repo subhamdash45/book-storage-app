@@ -1,30 +1,62 @@
-# React + TypeScript + Vite
+# Book Storage App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Book Storage App is a responsive web application for managing a list of books. Users can view book details, add new books, edit existing ones, and delete books. The application is built with React, TypeScript, and uses @tanstack/react-query for data fetching.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Setup and Installation](#setup-and-installation)
+- [Scripts](#scripts)
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- View a list of books with pagination.
+- View detailed information about each book.
+- Add new books to the list.
+- Edit existing books.
+- Delete books from the list.
+- Mark books as favorites.
+- Responsive design for mobile and desktop views.
 
-- Configure the top-level `parserOptions` property like this:
+## Technologies Used
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- **React**: JavaScript library for building user interfaces.
+- **TypeScript**: Superset of JavaScript that adds static typing.
+- **@tanstack/react-query**: Data fetching and state management.
+- **React Router**: Declarative routing for React.
+- **React Hook Form**: Form management in React.
+- **Sass**: CSS preprocessor for more maintainable styles.
+- **FontAwesome**: Icons for user interface design.
+- **Notistack**: Snackbar notifications for React.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Setup and Installation
+
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/subhamdash45/book-storage-app.git
+    cd book-storage-app
+    ```
+
+2. **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+3. **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+
+4. **Build the project for production:**
+    ```bash
+    npm run build
+    ```
+
+## Scripts
+
+- `npm run dev`: Starts the development server.
+- `npm run build`: Builds the project for production.
+- `npm run lint`: Runs ESLint to check for linting errors..
+
+
