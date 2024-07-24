@@ -38,7 +38,7 @@ export const BookForm: React.FC<TBookFormProps> = ({
     } else {
       reset();
     }
-  }, [editingBook, setValue, reset]);
+  }, [editingBook, reset, setValue]);
 
   const onSubmit: SubmitHandler<TBook> = (data) => {
     if (editingBook) {
