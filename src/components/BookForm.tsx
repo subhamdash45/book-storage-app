@@ -77,7 +77,7 @@ export const BookForm: React.FC<TBookFormProps> = ({
           {...register("publicationDate", { required: true })}
         />
       </div>
-      <button type="submit">{editingBook ? "Edit TBook" : "Add TBook"}</button>
+      <button type="submit">{editingBook ? "Edit Book" : "Add Book"}</button>
     </form>
   );
 };

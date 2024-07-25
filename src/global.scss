@@ -19,3 +19,9 @@ button {
   padding: 4px;
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+  button {
+    padding: 8px;
+  }
+}
