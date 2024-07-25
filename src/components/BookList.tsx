@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { BookItem } from "./BookItem";
 import { Pagination } from "./Pagination";
 import { useSnackbar } from "notistack";
