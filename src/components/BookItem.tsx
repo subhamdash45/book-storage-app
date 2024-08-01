@@ -2,15 +2,14 @@ import { useState, useEffect } from "react";
 import { TBook } from "../types";
 import { useNavigate } from "react-router-dom";
 import { toggleFavorite, isFavorite } from "../utils/localStorage";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faEdit,
-  faTrashAlt,
-  faHeart as solidHeart,
-} from "@fortawesome/free-solid-svg-icons";
-import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
+  FaHeart as SolidHeartIcon,
+  FaRegHeart as RegularHeartIcon,
+  FaEdit as EditIcon,
+  FaTrash as DeleteIcon,
+} from "react-icons/fa";
+import { MdBrokenImage as BrokenImage } from "react-icons/md";
 import "../styles/BookItem.scss";
-import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { useSnackbar } from "notistack";
 
 type TBookItemProps = {
@@ -65,14 +64,14 @@ export const BookItem: React.FC<TBookItemProps> = ({
             onError={hidePoster}
           />
         ) : (
-          <FontAwesomeIcon icon={faImage} className="poster" />
+          <BrokenImage className="poster" />
         )}
 
         <div>
           <div className="title">{book.title}</div>
           <div className="button-container">
             <button onClick={handleFavoriteToggle}>
-              <FontAwesomeIcon icon={favorite ? solidHeart : regularHeart} />
+              {favorite ? <SolidHeartIcon /> : <RegularHeartIcon />}
             </button>
             <button
               onClick={(e) => {
@@ -80,15 +79,18 @@ export const BookItem: React.FC<TBookItemProps> = ({
                 onEdit(e);
               }}
             >
-              <FontAwesomeIcon icon={faEdit} />
+              <EditIcon />
             </button>
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 onDelete(book.id, e);
+                enqueueSnackbar(`Book - ${book.title} has been deleted`, {
+                  variant: "success",
+                });
               }}
             >
-              <FontAwesomeIcon icon={faTrashAlt} />
+              <DeleteIcon />
             </button>
           </div>
         </div>

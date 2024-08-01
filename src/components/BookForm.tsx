@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { TBook } from "../types";
 import "../styles/BookForm.scss";
+import { useSnackbar } from "notistack";
 
 type TBookFormProps = {
   onAddBook: (book: TBook) => void;
@@ -16,6 +17,7 @@ export const BookForm: React.FC<TBookFormProps> = ({
   editingBook,
   onClose,
 }) => {
+  const { enqueueSnackbar } = useSnackbar();
   const { register, handleSubmit, reset, setValue } = useForm<TBook>();
 
   useEffect(() => {
@@ -49,6 +51,14 @@ export const BookForm: React.FC<TBookFormProps> = ({
     }
     reset();
     onClose();
+    enqueueSnackbar(
+      editingBook
+        ? "The book details has been updated"
+        : `Book - ${data.title} has been added`,
+      {
+        variant: "success",
+      },
+    );
   };
 
   return (

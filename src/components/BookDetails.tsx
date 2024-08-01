@@ -2,8 +2,7 @@ import { useState } from "react";
 import "../styles/BookDetail.scss";
 import { useNavigate } from "react-router-dom";
 import { TBook } from "../types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faImage } from "@fortawesome/free-solid-svg-icons";
+import { MdBrokenImage as BrokenImage } from "react-icons/md";
 
 type TBookDetailProps = {
   book: TBook;
@@ -36,7 +35,7 @@ export const BookDetail: React.FC<TBookDetailProps> = ({ book }) => {
             onError={hidePoster}
           />
         ) : (
-          <FontAwesomeIcon icon={faImage} className="posterImage poster" />
+          <BrokenImage className="posterImage poster" />
         )}
         <h2 className="text">{title}</h2>
         <p className="text">{author}</p>

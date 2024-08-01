@@ -1,7 +1,6 @@
 import { createPortal } from "react-dom";
 import "../styles/Modal.scss";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaTimes as CancelIcon } from "react-icons/fa";
 
 type TModalProps = {
   isOpen: boolean;
@@ -16,7 +15,7 @@ export const Modal: React.FC<TModalProps> = ({ isOpen, onClose, children }) => {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose}>
-          <FontAwesomeIcon icon={faTimes} />
+          <CancelIcon />
         </button>
         {children}
       </div>

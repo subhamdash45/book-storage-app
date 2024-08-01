@@ -8,9 +8,9 @@ export const getBooks = async (): Promise<TBook[]> => {
   return data;
 };
 
-export const getBookDetails = async (id: string): Promise<TBook> => {
-  const { data } = await axios.get(
-    `https://my-json-server.typicode.com/cutamar/mock/books/${id}`,
-  );
-  return data;
-};
+// export const getBookDetails = async (id: string): Promise<TBook> => {
+//   const { data } = await axios.get(
+//     `https://my-json-server.typicode.com/cutamar/mock/books/${id}`,
+//   );
+//   return data;
+// };

@@ -1,7 +1,7 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { TBook } from "../types";
-import { getBookDetails, getBooks } from "../apis/books";
+import { getBooks } from "../apis/books";
 
 export const useGetBooks = (): UseQueryResult<TBook[], AxiosError> => {
   return useQuery<TBook[], AxiosError>({
@@ -10,11 +10,12 @@ export const useGetBooks = (): UseQueryResult<TBook[], AxiosError> => {
   });
 };
 
-export const useGetBookDetails = (
-  id: string,
-): UseQueryResult<TBook, AxiosError> => {
-  return useQuery({
-    queryKey: ["book-details", id],
-    queryFn: () => getBookDetails(id),
-  });
-};
+// can be used later point
+// export const useGetBookDetails = (
+//   id: string,
+// ): UseQueryResult<TBook, AxiosError> => {
+//   return useQuery({
+//     queryKey: ["book-details", id],
+//     queryFn: () => getBookDetails(id),
+//   });
+// };

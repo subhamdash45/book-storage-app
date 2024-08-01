@@ -5,7 +5,7 @@ export const toggleFavorite = (id: number): void => {
   if (favorites.includes(id)) {
     localStorage.setItem(
       FAVORITES_KEY,
-      JSON.stringify(favorites.filter((fav) => fav !== id))
+      JSON.stringify(favorites.filter((fav) => fav !== id)),
     );
   } else {
     favorites.push(id);
@@ -18,5 +18,6 @@ export const isFavorite = (id: number): boolean => {
 };
 
 const getFavorites = (): number[] => {
-  return JSON.parse(localStorage.getItem(FAVORITES_KEY) || "[]");
+  const favoritesDetails = localStorage.getItem(FAVORITES_KEY);
+  return favoritesDetails ? JSON.parse(favoritesDetails) : [];
 };
