@@ -10,7 +10,7 @@ import { useGetBooks } from "../hooks/bookDetails";
 import { booksPerPage } from "../constants/books";
 import { BookListLoader } from "./skeletalLoaders/BookListLoader";
 
-type TBookListState = {
+type TBookList = {
   localBooks: TBook[];
   apiBooks: TBook[];
   currentPage: number;
@@ -20,18 +20,18 @@ type TBookListState = {
 
 export const BookList: React.FC = () => {
   const { data: apiBooks, isLoading, error } = useGetBooks();
-  const [state, setState] = useState<TBookListState>({
+  const [state, setState] = useState<TBookList>({
     localBooks: [],
     apiBooks: [],
     currentPage: 1,
     editingBook: null,
     isModalOpen: false,
   });
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar: snackbar } = useSnackbar();
 
   useEffect(() => {
     if (error) {
-      enqueueSnackbar("Failed to load books. Please try again later.", {
+      snackbar("Failed to load books. Please try again later.", {
         variant: "error",
       });
     } else if (apiBooks) {
@@ -40,7 +40,7 @@ export const BookList: React.FC = () => {
         apiBooks: apiBooks,
       }));
     }
-  }, [apiBooks, error, enqueueSnackbar]);
+  }, [apiBooks, error, snackbar]);
 
   const allBooks = [...state.localBooks, ...state.apiBooks];
 
@@ -86,7 +86,7 @@ export const BookList: React.FC = () => {
     }
   };
 
-  const handleOpenModal = () => {
+  const handleModalOpen = () => {
     setState((prevState) => ({
       ...prevState,
       editingBook: null,
@@ -127,7 +127,7 @@ export const BookList: React.FC = () => {
     <div className="book-list-container">
       <div className="header">
         <h1>Book List</h1>
-        <button onClick={handleOpenModal}>Add Book</button>
+        <button onClick={handleModalOpen}>Add Book</button>
       </div>
       {isLoading ? (
         <div className="book-list">
@@ -137,7 +137,10 @@ export const BookList: React.FC = () => {
         </div>
       ) : (
         <>
-          <Modal isOpen={state.isModalOpen} onClose={handleCloseModal}>
+          <Modal
+            isModalOpen={state.isModalOpen}
+            onModalClose={handleCloseModal}
+          >
             <BookForm
               onAddBook={handleAddBook}
               onEditBook={handleEditBook}

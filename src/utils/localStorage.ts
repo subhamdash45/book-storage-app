@@ -13,7 +13,7 @@ export const toggleFavorite = (id: number): void => {
   }
 };
 
-export const isFavorite = (id: number): boolean => {
+export const isMarkedFavorite = (id: number): boolean => {
   return getFavorites().includes(id);
 };
 

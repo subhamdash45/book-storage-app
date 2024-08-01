@@ -1,7 +1,4 @@
-import { useState, useEffect } from "react";
-import { TBook } from "../types";
-import { useNavigate } from "react-router-dom";
-import { toggleFavorite, isFavorite } from "../utils/localStorage";
+import { toggleFavorite, isMarkedFavorite } from "../utils/localStorage";
 import {
   FaHeart as SolidHeartIcon,
   FaRegHeart as RegularHeartIcon,
@@ -11,11 +8,14 @@ import {
 import { MdBrokenImage as BrokenImage } from "react-icons/md";
 import "../styles/BookItem.scss";
 import { useSnackbar } from "notistack";
+import { TBook } from "../types";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type TBookItemProps = {
   book: TBook;
-  onEdit: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onDelete: (id: number, e: React.MouseEvent<HTMLButtonElement>) => void;
+  onEdit: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onDelete: (id: number, event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 export const BookItem: React.FC<TBookItemProps> = ({
@@ -23,21 +23,21 @@ export const BookItem: React.FC<TBookItemProps> = ({
   onEdit,
   onDelete,
 }) => {
-  const [favorite, setFavorite] = useState<boolean>(isFavorite(book.id));
-  const navigate = useNavigate();
+  const [favorite, setFavorite] = useState<boolean>(isMarkedFavorite(book.id));
+  const routeChange = useNavigate();
   const [showPoster, setShowPoster] = useState(true);
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar: snackbar } = useSnackbar();
 
   const hidePoster = () => {
     setShowPoster(false);
   };
 
-  const handleFavoriteToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleFavoriteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     toggleFavorite(book.id);
-    const isNowFavorite = isFavorite(book.id);
+    const isNowFavorite = isMarkedFavorite(book.id);
     setFavorite(isNowFavorite);
-    enqueueSnackbar(
+    snackbar(
       `Book - ${book.title} has been ${
         isNowFavorite ? "added to" : "removed from"
       } favorites`,
@@ -46,13 +46,13 @@ export const BookItem: React.FC<TBookItemProps> = ({
   };
 
   useEffect(() => {
-    setFavorite(isFavorite(book.id));
+    setFavorite(isMarkedFavorite(book.id));
   }, [book.id]);
 
   return (
     <div
       className="card-container"
-      onClick={() => navigate(`/book/${book.id}`, { state: { book } })}
+      onClick={() => routeChange(`/book/${book.id}`, { state: { book } })}
     >
       <div className="card">
         {showPoster ? (
@@ -70,7 +70,7 @@ export const BookItem: React.FC<TBookItemProps> = ({
         <div>
           <div className="title">{book.title}</div>
           <div className="button-container">
-            <button onClick={handleFavoriteToggle}>
+            <button onClick={handleFavoriteClick}>
               {favorite ? <SolidHeartIcon /> : <RegularHeartIcon />}
             </button>
             <button
@@ -85,7 +85,7 @@ export const BookItem: React.FC<TBookItemProps> = ({
               onClick={(e) => {
                 e.stopPropagation();
                 onDelete(book.id, e);
-                enqueueSnackbar(`Book - ${book.title} has been deleted`, {
+                snackbar(`Book - ${book.title} has been deleted`, {
                   variant: "success",
                 });
               }}

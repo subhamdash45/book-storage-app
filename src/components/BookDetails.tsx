@@ -9,7 +9,7 @@ type TBookDetailProps = {
 };
 
 export const BookDetail: React.FC<TBookDetailProps> = ({ book }) => {
-  const navigate = useNavigate();
+  const changeRoute = useNavigate();
   const [showPoster, setShowPoster] = useState(true);
   const hidePoster = () => {
     setShowPoster(false);
@@ -21,7 +21,7 @@ export const BookDetail: React.FC<TBookDetailProps> = ({ book }) => {
     <div className="book-list-container">
       <div className="header">
         <h1>Book Details</h1>
-        <button className="back-button" onClick={() => navigate(-1)}>
+        <button className="back-button" onClick={() => changeRoute(-1)}>
           Back
         </button>
       </div>
